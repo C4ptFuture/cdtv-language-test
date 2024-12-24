@@ -1,0 +1,39 @@
+
+FailAt 21
+
+; Run once to make sure we're on CDTV (it will return FAIL if playerprefs.lib
+; cannot be opened)
+cdtv-language-test
+If FAIL 
+  Skip Fault
+EndIf
+
+; Test for German
+cdtv-language-test de
+If NOT WARN
+  Echo "German"
+  skip Done
+Else
+  Echo "German is WARN"
+EndIf
+
+; Test for Nederlands
+cdtv-language-test nl
+If NOT WARN
+  Echo "Dutch"
+  Skip Done
+Else
+  Echo "Dutch is WARN"
+EndIf
+
+; If we end up here, we default to English
+Echo "English"
+Skip Done
+
+Lab Fault
+Echo "ERROR returned"
+Skip Done
+
+
+Lab Done
+Echo "Done"
